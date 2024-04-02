@@ -1,7 +1,8 @@
 export default ()=>{
-    
-    const root = document.getElementById('root')
 
+    document.getElementById('meta-theme-color').setAttribute('content', 'f7f7f7')
+    const root = document.getElementById('root')
+    
     const $elements = (()=> {
 
         return Array.from( root.querySelectorAll('[id]') ).reduce( (prev, curr )=> {
