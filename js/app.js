@@ -1,6 +1,6 @@
 export default ()=>{
 
-    document.getElementById('meta-theme-color').setAttribute('content', 'f7f7f7')
+    document.getElementById('meta-theme-color').setAttribute('content', '#1c1c1e')
     const root = document.getElementById('root')
     
     const $elements = (()=> {
