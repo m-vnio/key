@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>password</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script defer type="module" src="./js/index.js"></script>
+    <script src="https://kit.fontawesome.com/aaa143d91d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="root">
+
+        <div class="div_T7Db7vB">
+            <div class="div_ZUcrg6Z">
+                <input type="text" value="" id="textPassword" readonly>
+                <button type="button" id="renderPassword"><i class="fa-solid fa-shuffle"></i></button>
+                <button type="button" id="copyCode"><i class="fa-regular fa-copy"></i></button>
+            </div>
+            <div class="div_dyq85BA">
+                <div class="div_IfzkCJJ">
+                    <input id="range" type="range" min="0" value="7" max="99" name="limite">
+                    <hr id="rangeProgress">
+                </div>
+                <div class="div_IRP2OXd">
+                    <span id="rangeText">7</span>
+                </div>
+            </div>
+            <div class="div_krgt77R">
+                <div class="div_7AfOlDS">
+                    <input data-name="mayuscula" type="text" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+                    <label><input data-name-active="mayuscula" type="checkbox" checked></label>
+                </div>
+                <div class="div_7AfOlDS">
+                    <input data-name="minuscula" type="text" value="abcdefghijklmnopqrstuvwxyz">
+                    <label><input data-name-active="minuscula" type="checkbox" checked></label>
+                </div>
+                <div class="div_7AfOlDS">
+                    <input data-name="numero" type="text" value="0123456789">
+                    <label><input data-name-active="numero" type="checkbox" checked></label>
+                </div>
+                <div class="div_7AfOlDS">
+                    <input data-name="simbolo" type="text" value="({[¿¡@/_-ñ!?]})">
+                    <label><input data-name-active="simbolo" type="checkbox"></label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
