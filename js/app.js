@@ -107,7 +107,7 @@ export default ()=>{
 
         const output = Array( parseInt( $elements.range.value ) ).fill('').map(()=> {
 
-            return suffle[ rand( suffle.length ) ]
+            return suffle[ rand( suffle.length - 1 ) ]
 
         }).join('')
 
