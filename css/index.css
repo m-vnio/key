@@ -10,9 +10,51 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.app-checkbox-toggle {
+  --background-color: #b0bec5;
+  margin: 0 2.5px;
+  position: relative;
+  background: var(--background-color);
+  width: 40px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+
+  border-radius: 40px;
+  cursor: pointer;
+
+  transition: none 0.3s ease;
+  transition-property: left, background, outline;
+
+  &:has(input:checked) {
+    --background-color: #2196f3;
+  }
+
+  & input {
+    display: none;
+
+    &:checked + span {
+      left: calc(100% - 20px);
+      background: #ffffff;
+    }
+  }
+
+  & span {
+    left: 0;
+    position: relative;
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+    background: #ffffff;
+
+    transition: inherit;
+    outline: 2.5px var(--background-color) solid;
+  }
 }

@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta id="meta-theme-color" name="theme-color" content="#FFFFFF">
+    <meta id="meta-theme-color" name="theme-color" content="#000000">
     <title>password</title>
     <link rel="manifest" href="./manifest.json">
     <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <script defer type="module" src="./js/index.js?nv=1"></script>
+    <link rel="stylesheet" href="./css/index.css?nv=1738604086554">
+    <link rel="stylesheet" href="./css/style.css?nv=1738604086554">
+    <script defer type="module" src="./js/index.js?nv=1738604086554"></script>
     <script src="https://kit.fontawesome.com/aaa143d91d.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,35 +19,75 @@
 
         <div class="div_T7Db7vB">
             <div class="div_ZUcrg6Z">
-                <input type="text" value="" id="textPassword" readonly>
-                <button type="button" id="renderPassword"><i class="fa-solid fa-shuffle"></i></button>
-                <button type="button" id="copyCode"><i class="fa-regular fa-copy"></i></button>
+                <textarea id="textPassword" readonly></textarea>
+                <div style="display: flex; justify-content: space-between;">
+                    <div class="div_IRP2OXd">
+                        <span id="rangeText">7</span>
+                    </div>
+                    <div class="div_021yvlf">
+                        <button type="button" id="renderPassword"><i class="fa-solid fa-shuffle"></i></button>
+                        <button type="button" id="copyCode"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
             </div>
             <div class="div_dyq85BA">
-                <div class="div_IfzkCJJ">
-                    <input id="range" type="range" min="0" value="7" max="99" name="limite">
-                    <hr id="rangeProgress">
+
+                <div class="div_4plq93h">
+                    <button id="rangeLeft">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <rect x="6" y="11" width="12" height="2" rx="1"></rect>
+                        </svg>
+                    </button>
+                    <div class="div_IfzkCJJ">
+                        <input id="range" type="range" min="0" value="7" max="500" name="limite">
+                        <hr id="rangeProgress">
+                    </div>
+                    <button id="rangeRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M17,11H13V7a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1v4H7a1,1,0,0,0-1,1H6a1,1,0,0,0,1,1h4v4a1,1,0,0,0,1,1h0a1,1,0,0,0,1-1V13h4a1,1,0,0,0,1-1h0A1,1,0,0,0,17,11Z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
-                <div class="div_IRP2OXd">
-                    <span id="rangeText">7</span>
-                </div>
+
             </div>
             <div class="div_krgt77R">
                 <div class="div_7AfOlDS">
                     <input data-name="mayuscula" type="text" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
-                    <label><input data-name-active="mayuscula" type="checkbox" checked></label>
+                    <div style="margin: auto;">
+                        <label class="app-checkbox-toggle">
+                            <input data-name-active="mayuscula" type="checkbox" checked>
+                            <span></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="div_7AfOlDS">
                     <input data-name="minuscula" type="text" value="abcdefghijklmnopqrstuvwxyz">
-                    <label><input data-name-active="minuscula" type="checkbox" checked></label>
+                    <div style="margin: auto;">
+                        <label class="app-checkbox-toggle">
+                            <input data-name-active="minuscula" type="checkbox" checked>
+                            <span></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="div_7AfOlDS">
                     <input data-name="numero" type="text" value="0123456789">
-                    <label><input data-name-active="numero" type="checkbox" checked></label>
+                    <div style="margin: auto;">
+                        <label class="app-checkbox-toggle">
+                            <input data-name-active="numero" type="checkbox" checked>
+                            <span></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="div_7AfOlDS">
                     <input data-name="simbolo" type="text" value="({[¿¡@/_-ñ!?]})">
-                    <label><input data-name-active="simbolo" type="checkbox"></label>
+                    <div style="margin: auto;">
+                        <label class="app-checkbox-toggle">
+                            <input data-name-active="simbolo" type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>

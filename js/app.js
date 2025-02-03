@@ -1,121 +1,130 @@
-export default ()=>{
+export default () => {
+  document
+    .getElementById("meta-theme-color")
+    .setAttribute("content", "#000000");
+  const root = document.getElementById("root");
 
-    document.getElementById('meta-theme-color').setAttribute('content', '#1c1c1e')
-    const root = document.getElementById('root')
-    
-    const $elements = (()=> {
+  const $elements = (() => {
+    return Array.from(root.querySelectorAll("[id]")).reduce((prev, curr) => {
+      prev[curr.getAttribute("id")] = curr;
+      return prev;
+    }, {});
+  })();
 
-        return Array.from( root.querySelectorAll('[id]') ).reduce( (prev, curr )=> {
-            
-            prev[ curr.getAttribute('id') ] = curr
-            return prev
+  const $elementsInputText = (() => {
+    return Array.from(root.querySelectorAll("[data-name]")).reduce(
+      (prev, curr) => {
+        prev[curr.getAttribute("data-name")] = curr;
+        return prev;
+      },
+      {}
+    );
+  })();
 
-        }, {})
+  const $elementsInputCheckbox = (() => {
+    return Array.from(root.querySelectorAll("[data-name-active]")).reduce(
+      (prev, curr) => {
+        prev[curr.getAttribute("data-name-active")] = curr;
+        return prev;
+      },
+      {}
+    );
+  })();
 
-    })()
+  $elements.renderPassword.addEventListener("click", () => {
+    // $elements.renderPassword.classList.add('active')
+    renderPassword();
+  });
 
-    const $elementsInputText = (()=> {
+  // $elements.renderPassword.addEventListener('transitionend', (e) => {
+  //     if( $elements.renderPassword.classList.contains('active') ) {
+  //         $elements.renderPassword.classList.remove('active')
+  //     }
+  // });
 
-        return Array.from( root.querySelectorAll('[data-name]') ).reduce( (prev, curr )=> {
-            
-            prev[ curr.getAttribute('data-name') ] = curr
-            return prev
+  $elements.copyCode.addEventListener("click", () => {
+    // $elements.copyCode.classList.add('active')
+    copyToClipboard($elements.textPassword.value);
+  });
 
-        }, {})
+  // $elements.copyCode.addEventListener('transitionend', (e) => {
+  //     if( $elements.copyCode.classList.contains('active') ) {
+  //         $elements.copyCode.classList.remove('active')
+  //     }
+  // });
 
-    })()
+  $elements.range.addEventListener("input", () => {
+    renderPassword();
+  });
 
-    const $elementsInputCheckbox = (()=> {
+  $elements.rangeLeft.addEventListener("click", () => {
+    const num = Math.max(0, parseInt($elements.range.value) - 1);
+    $elements.range.value = num;
+    renderPassword();
+  });
 
-        return Array.from( root.querySelectorAll('[data-name-active]') ).reduce( (prev, curr )=> {
-            
-            prev[ curr.getAttribute('data-name-active') ] = curr
-            return prev
+  $elements.rangeRight.addEventListener("click", () => {
+    const num = Math.max(0, parseInt($elements.range.value) + 1);
+    $elements.range.value = num;
+    renderPassword();
+  });
 
-        }, {})
-
-    })()
-
-    $elements.renderPassword.addEventListener('click', ()=> {
-        $elements.renderPassword.classList.add('active')
-        renderPassword()
-    })
-
-    $elements.renderPassword.addEventListener('transitionend', (e) => {
-        if( $elements.renderPassword.classList.contains('active') ) {
-            $elements.renderPassword.classList.remove('active')
-        }
+  Object.values($elementsInputCheckbox).forEach((element) => {
+    element.addEventListener("change", () => {
+      renderPassword();
     });
+  });
 
-    $elements.copyCode.addEventListener('click', ()=> {
-        $elements.copyCode.classList.add('active')
-        copyToClipboard( $elements.textPassword.value )
-    })
+  function rand(...params) {
+    const [max, min = 0] = params.reverse();
+    return Math.floor(Math.random() * (max + 1 - min) + min);
+  }
 
-    $elements.copyCode.addEventListener('transitionend', (e) => {
-        if( $elements.copyCode.classList.contains('active') ) {
-            $elements.copyCode.classList.remove('active')
-        }
-    });
+  function copyToClipboard(text = "") {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+    } else {
+      const textarea = document.createElement("textarea");
+      textarea.setAttribute("style", "position: fixed; top: 100%; left: 100%;");
 
-    $elements.range.addEventListener('input', ()=> {
-        renderPassword()
-    })
+      textarea.value = text;
 
-    Object.values( $elementsInputCheckbox ).forEach(element => {
-        element.addEventListener('change', ()=> {
-            renderPassword()
-        })
-    });
+      document.body.append(textarea);
 
-    function rand( ...params ){
-        const [ max, min = 0] = params.reverse()
-        return Math.floor(Math.random() * ((max + 1) - min) + min)
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+
+      document.execCommand("copy");
+
+      textarea.remove();
     }
+  }
 
-    function copyToClipboard(text = '') {
+  const renderPassword = () => {
+    const suffle = Object.values($elementsInputCheckbox)
+      .map((element) => {
+        if (!element.checked) return "";
+        return $elementsInputText[element.dataset.nameActive].value;
+      })
+      .join("");
 
-        if( navigator.clipboard ) {
-            navigator.clipboard.writeText(text)
-        } else {
-            
-            const textarea = document.createElement('textarea')
-            textarea.setAttribute('style', 'position: fixed; top: 0; transform: translateY(-100%);')
-            
-            textarea.value = text;
-        
-            document.body.append(textarea);
-        
-            textarea.select();
-            textarea.setSelectionRange(0, text.length);
-        
-            document.execCommand('copy');
-        
-            textarea.remove()
-        } 
-    
-    }
+    const output = Array(parseInt($elements.range.value))
+      .fill("")
+      .map(() => {
+        return suffle[rand(suffle.length - 1)];
+      })
+      .join("");
 
-    const renderPassword =()=>{
+    $elements.textPassword.value = output || Date.now();
+    $elements.rangeProgress.setAttribute(
+      "style",
+      `width:${(
+        (parseInt($elements.range.value) / parseInt($elements.range.max)) *
+        100
+      ).toFixed(2)}%`
+    );
+    rangeText.textContent = $elements.range.value;
+  };
 
-        const suffle = Object.values( $elementsInputCheckbox ).map(element => {
-
-            if( !element.checked ) return ''
-            return $elementsInputText[ element.dataset.nameActive ].value
-
-        }).join('');
-
-        const output = Array( parseInt( $elements.range.value ) ).fill('').map(()=> {
-
-            return suffle[ rand( suffle.length - 1 ) ]
-
-        }).join('')
-
-        $elements.textPassword.value = output || Date.now() 
-        $elements.rangeProgress.setAttribute('style', `width:${ ((parseInt($elements.range.value) / parseInt($elements.range.max)) * 100).toFixed(2) }%`)
-        rangeText.textContent = $elements.range.value
-    }
-
-    renderPassword()
-
-}
+  renderPassword();
+};
